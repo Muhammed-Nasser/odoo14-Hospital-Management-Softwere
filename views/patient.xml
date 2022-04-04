@@ -1,0 +1,54 @@
+<odoo>
+    <data>
+        <record id="hospital_patient_form" model="ir.ui.view">
+            <field name="name">hospital patient form</field>
+            <field name="model">hospital.patient</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="age"/>
+                            </group>
+                            <group>
+                                <field name="gender"/>
+                                <field name="note"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="patients_action" model="ir.actions.act_window">
+            <field name="name">Patients</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hospital.patient</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new patient!
+                </p>
+            </field>
+        </record>
+
+        <!-- side menu -->
+        <menuitem
+                id="hospital_base_root"
+                name="My Hospital"/>
+        <!-- main top menu -->
+        <menuitem
+                id="hospital_patient_root"
+                name="Patients"
+                parent="hospital_base_root"
+                sequence="10"/>
+        <!-- dropdown top menu -->
+        <menuitem
+                id="hospital_patient"
+                name="Patients"
+                parent="hospital_patient_root"
+                action="patients_action"
+                sequence="10"/>
+    </data>
+</odoo>
