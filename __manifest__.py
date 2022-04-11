@@ -8,7 +8,8 @@
     'sequence': 10,
     'description': """ Hospital Management Software """,
     'category': 'Productivity',
-    'depends': ['sale'],
+    'depends': ['sale',
+                'mail'],
     'data': [
         'security/ir.model.access.csv',
         'views/patient.xml',
