@@ -44,6 +44,8 @@
                     <field name="gender"/>
                     <field name="age"/>
                     <field name="note"/>
+                    <field name="state"/>
+
                 </tree>
             </field>
         </record>
@@ -54,7 +56,17 @@
             <field name="model">hospital.patient</field>
             <field name="arch" type="xml">
                 <form>
+
                     <sheet>
+                        <header>
+                            <button id="button_confirm" name="action_confirm" string="Cancel" class="btn-danger"
+                             attrs="{'invisible': [('state', '=', 'cancel')]}" type="object"/>
+                            <button id="button_done" name="action_done" string="Done" class="btn-success"
+                             states="draft,confirm" type="object"/>
+
+                            <field name="state" widget="statusbar" options="{'clickable': '1'}"
+                                   statusbar_visible="draft,confirm"/>
+                        </header>
                         <group>
                             <group>
                                 <field name="name"/>
@@ -66,6 +78,8 @@
                             </group>
                         </group>
                     </sheet>
+
+                    <!--Email threats-->
                     <div class="oe_chatter">
                         <field name="message_follower_ids"/>
                         <field name="activity_ids"/>
