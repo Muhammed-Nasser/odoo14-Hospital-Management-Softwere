@@ -7,20 +7,21 @@ class HospitalPatient(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = "Hospital Patient Model"
 
-    name = fields.Char(string='Name', required=True)
+    name = fields.Char(string='Name', required=True, tracking=True)
     age = fields.Integer(string='Age')
     gender = fields.Selection([
         ('male', 'Male'),
         ('female', 'Female'),
         ('other', 'Other'),
-    ], required=True)
-    note = fields.Text(string='Description')
+    ], required=True, tracking=True)
+    note = fields.Text(string='Description', tracking=True)
     state = fields.Selection([
         ('draft', 'Draft'),
         ('confirm', 'Confirmed'),
         ('done', 'Done'),
         ('cancel', 'cancelled'),
-    ], default='draft', string="Status")
+    ], default='draft', string="Status", tracking=True)
+    responsible_id = fields.Many2one('res.partner', string="Responsible", tracking=True)
 
     def action_confirm(self):
         if self.state != 'cancel':
@@ -33,5 +34,12 @@ class HospitalPatient(models.Model):
             self.state = 'done'
         else:
             print("not allowed")
+
+    @api.model
+    def create(self, vals):
+        if not vals.get('note'):
+            vals['note'] = "New Patient"
+        return super(HospitalPatient, self).create(vals)
+
 
 
