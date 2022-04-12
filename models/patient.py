@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from odoo import api, fields, models
+from odoo import api, fields, models, _
 
 
 class HospitalPatient(models.Model):
@@ -21,7 +21,10 @@ class HospitalPatient(models.Model):
         ('done', 'Done'),
         ('cancel', 'cancelled'),
     ], default='draft', string="Status", tracking=True)
+    # Many2one Relation
     responsible_id = fields.Many2one('res.partner', string="Responsible", tracking=True)
+    reference = fields.Char(string='Patient Reference', required=True, copy=False, readonly=True,
+                            default=lambda self: _('New'))
 
     def action_confirm(self):
         if self.state != 'cancel':
@@ -39,6 +42,8 @@ class HospitalPatient(models.Model):
     def create(self, vals):
         if not vals.get('note'):
             vals['note'] = "New Patient"
+        if vals.get('reference', _('New')) == _('New'):
+            vals['reference'] = self.env['ir.sequence'].next_by_code('patient.no') or _('New')
         return super(HospitalPatient, self).create(vals)
 
 
