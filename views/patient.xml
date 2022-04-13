@@ -114,10 +114,10 @@
                         <filter string="Male" name="male" domain="[('gender', '=', 'male')]"/>
                         <filter string="Female" name="female" domain="[('gender', '=', 'female')]"/>
                     </group>
-
                     <!--Filters-->
                     <filter string="Gender" name="gender" context="{'group_by':'gender'}"/>
                     <filter string="Patient Name" name="patient_name" context="{'group_by':'name'}"/>
+                    <filter string="Responsible" name="responsible_id" context="{'group_by':'responsible_id'}"/>
                 </search>
             </field>
         </record>
@@ -128,6 +128,9 @@
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">hospital.patient</field>
             <field name="view_mode">tree,kanban,form</field>
+            <!-- add default group by value in main view | add more than value using ,'search_default_patient_name': 1 -->
+            <!-- add default Filter value in main view | add more than value using ,'search_default_patient_name': 1 -->
+            <field name="context">{'search_default_responsible_id': 1 ,'search_default_male': 1 }</field>
             <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">
                     Create a new patient!
