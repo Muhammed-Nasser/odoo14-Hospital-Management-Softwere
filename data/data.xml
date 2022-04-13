@@ -11,5 +11,14 @@
             <field name="company_id" eval="False"/>
         </record>
 
+        <!-- Sequences for appointments -->
+        <record id="seq_appointment" model="ir.sequence">
+            <field name="name">Appointment No.</field>
+            <field name="code">appointment.no</field>
+            <field name="prefix">A</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
     </data>
 </odoo>

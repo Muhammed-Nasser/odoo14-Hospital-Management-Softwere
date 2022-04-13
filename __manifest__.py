@@ -15,6 +15,7 @@
         'data/data.xml',
         'views/patient_all.xml',
         'views/patient_kids.xml',
+        'views/appointment_view.xml',
         'views/sale.xml',
     ],
     'demo': [],
