@@ -63,8 +63,8 @@
                         <header>
                             <button id="button_confirm" name="action_confirm" string="Cancel" class="btn-danger"
                              attrs="{'invisible': [('state', '=', 'cancel')]}" type="object"/>
-                            <button id="button_done" name="action_done" string="Done" class="btn-success"
-                                   states="draft,confirm" type="object"/>
+                            <button id="button_done" name="action_done" string="Mark as Done" class="btn-success"
+                                   states="confirm" type="object" confirm="Are you sure? Mark it as DONE!"/>
                             <field name="state" widget="statusbar" options="{'clickable': '1'}"
                                    statusbar_visible="draft,confirm"/>
                         </header>
