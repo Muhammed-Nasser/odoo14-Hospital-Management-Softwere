@@ -113,6 +113,7 @@
                     <group expand="1" string="Group By">
                         <filter string="Male" name="male" domain="[('gender', '=', 'male')]"/>
                         <filter string="Female" name="female" domain="[('gender', '=', 'female')]"/>
+                        <filter string="Kids" name="kids" domain="[('age', '&lt;', '18')]"/>
                     </group>
                     <!--Filters-->
                     <filter string="Gender" name="gender" context="{'group_by':'gender'}"/>
@@ -122,7 +123,8 @@
             </field>
         </record>
 
-        <!--Actions-->
+
+        <!--Actions | patient -->
         <record id="patients_action" model="ir.actions.act_window">
             <field name="name">Patients</field>
             <field name="type">ir.actions.act_window</field>
@@ -153,9 +155,10 @@
         <!-- dropdown top menu -->
         <menuitem
                 id="hospital_patient"
-                name="Patients"
+                name="All Patients"
                 parent="hospital_patient_root"
                 action="patients_action"
                 sequence="10"/>
+
     </data>
 </odoo>

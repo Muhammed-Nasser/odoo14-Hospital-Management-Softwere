@@ -13,7 +13,8 @@
     'data': [
         'security/ir.model.access.csv',
         'data/data.xml',
-        'views/patient.xml',
+        'views/patient_all.xml',
+        'views/patient_kids.xml',
         'views/sale.xml',
     ],
     'demo': [],
