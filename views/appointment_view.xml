@@ -70,6 +70,7 @@
                         <group>
                             <group>
                                 <field name="patient_id"/>
+                                <field name="gender"/>
                                 <field name="age"/>
                                 <field name="responsible_id"/>
                             </group>
@@ -103,17 +104,6 @@
                     <field name="patient_id"/>
                     <field name="note"/>
                     <separator/>
-
-                    <!--Group By-->
-<!--                    <group expand="1" string="Group By">-->
-<!--                        <filter string="Male" name="male" domain="[('gender', '=', 'male')]"/>-->
-<!--                        <filter string="Female" name="female" domain="[('gender', '=', 'female')]"/>-->
-<!--                        <filter string="Kids" name="kids" domain="[('age', '&lt;', '18')]"/>-->
-<!--                    </group>-->
-                    <!--Filters-->
-<!--                    <filter string="Gender" name="gender" context="{'group_by':'gender'}"/>-->
-<!--                    <filter string="Patient Name" name="patient_name" context="{'group_by':'name'}"/>-->
-<!--                    <filter string="Responsible" name="responsible_id" context="{'group_by':'responsible_id'}"/>-->
                 </search>
             </field>
         </record>
