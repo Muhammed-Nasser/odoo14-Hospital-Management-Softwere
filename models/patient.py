@@ -9,6 +9,8 @@ class HospitalPatient(models.Model):
 
     name = fields.Char(string='Name', required=True, tracking=True)
     age = fields.Integer(string='Age')
+    # computed field
+    appointments_count = fields.Integer(string='Appointments Count', compute='_compute_appointments_count')
     gender = fields.Selection([
         ('male', 'Male'),
         ('female', 'Female'),
@@ -26,6 +28,13 @@ class HospitalPatient(models.Model):
     reference = fields.Char(string='Patient Reference', required=True, copy=False, readonly=True,
                             default=lambda self: _('New'))
 
+    # computed method
+    def _compute_appointments_count(self):
+        num = self.env['hospital.appointment'].search_count([('patient_id', '=', self.id)])
+        self.appointments_count = num
+        print(self.env['hospital.appointment'])
+
+    # buttons functions
     def action_confirm(self):
         if self.state != 'cancel':
             self.state = 'cancel'
