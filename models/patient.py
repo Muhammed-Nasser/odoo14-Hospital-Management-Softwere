@@ -30,9 +30,12 @@ class HospitalPatient(models.Model):
 
     # computed method
     def _compute_appointments_count(self):
-        num = self.env['hospital.appointment'].search_count([('patient_id', '=', self.id)])
-        self.appointments_count = num
-        print(self.env['hospital.appointment'])
+        # Singleton Error => solve for rec in self:
+        for rec in self:
+            num = rec.env['hospital.appointment'].search_count([('patient_id', '=', rec.id)])
+            rec.appointments_count = num
+            print(rec.env['hospital.appointment'])
+
 
     # buttons functions
     def action_confirm(self):

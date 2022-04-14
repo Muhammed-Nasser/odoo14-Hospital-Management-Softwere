@@ -45,6 +45,7 @@
                     <field name="responsible_id"/>
                     <field name="age"/>
                     <field name="note"/>
+                    <field name="appointments_count"/>
                     <field name="state"/>
 
                 </tree>
