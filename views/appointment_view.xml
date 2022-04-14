@@ -70,7 +70,8 @@
                         <group>
                             <group>
                                 <field name="patient_id"/>
-                                <field name="gender"/>
+                               <!-- read only issue (while save the value disappear) => fixed with force_save-->
+                                <field name="gender" readonly="1" force_save="1"/>
                                 <field name="age"/>
                                 <field name="responsible_id"/>
                             </group>
