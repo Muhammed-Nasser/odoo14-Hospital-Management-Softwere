@@ -66,6 +66,8 @@
                              attrs="{'invisible': [('state', '=', 'cancel')]}" type="object"/>
                             <button id="button_done" name="action_done" string="Mark as Done" class="btn-success"
                                    states="confirm" type="object" confirm="Are you sure? Mark it as DONE!"/>
+                            <button id="button_create_appointment" name="%(create_appointment_action)d" string="Create New Appointment" class="btn-success"
+                                    type="action"/>
                             <field name="state" widget="statusbar" options="{'clickable': '1'}"
                                    statusbar_visible="draft,confirm"/>
                         </header>

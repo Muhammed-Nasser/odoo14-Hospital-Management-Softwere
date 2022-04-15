@@ -140,5 +140,13 @@
                 action="appointments_action"
                 sequence="10"/>
 
+        <!-- dropdown top menu | create appointment wizard -->
+        <menuitem
+                id="create_appointment_wizard"
+                name="Create Appointment"
+                parent="hospital_appointment_root_menu"
+                action="create_appointment_action"
+                sequence="10"/>
+
     </data>
 </odoo>

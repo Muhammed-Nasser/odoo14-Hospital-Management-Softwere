@@ -11,8 +11,11 @@
     'depends': ['sale',
                 'mail'],
     'data': [
+        # orders security => data => wizard => views
+        # menu wizard add in the view files
         'security/ir.model.access.csv',
         'data/data.xml',
+        'wizard/create_appointment_view.xml',
         'views/patient_all.xml',
         'views/patient_kids.xml',
         'views/appointment_view.xml',
