@@ -50,6 +50,7 @@ class HospitalPatient(models.Model):
         else:
             print("not allowed")
 
+    # override create function
     @api.model
     def create(self, vals):
         if not vals.get('note'):
@@ -57,6 +58,13 @@ class HospitalPatient(models.Model):
         if vals.get('reference', _('New')) == _('New'):
             vals['reference'] = self.env['ir.sequence'].next_by_code('patient.no') or _('New')
         return super(HospitalPatient, self).create(vals)
+
+    # override default value function => called when we add default='value' attr. 
+    @api.model
+    def default_get(self, fields):
+        vals = super(HospitalPatient, self).default_get(fields)
+        vals['gender'] = 'female'
+        return vals
 
 
 

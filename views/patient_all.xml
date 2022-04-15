@@ -84,7 +84,8 @@
                                 <field name="appointments_count" readonly="1"/>
                             </group>
                             <group>
-                                <field name="gender" invisible="context.get('hide_gender', True)" />
+                                <!--invisible="context.get('hide_gender', True)"-->
+                                <field name="gender" />
                                 <field name="note"/>
                             </group>
                         </group>

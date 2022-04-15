@@ -9,6 +9,6 @@ class CreateAppointmentWizard(models.TransientModel):
     patient_id = fields.Many2one('hospital.patient', string="Patient", required=True)
 
     def action_create_appointment(self):
+        print(self.env)
         print("test")
-
 
