@@ -80,6 +80,7 @@
                                 <field name="responsible_id"/>
                             </group>
                             <group>
+                                <field name="doctor_id"/>
                                 <field name="note"/>
                                 <field name="date_appointment"/>
                                 <field name="date_check"/>

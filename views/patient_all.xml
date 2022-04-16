@@ -40,13 +40,18 @@
             <field name="model">hospital.patient</field>
             <field name="arch" type="xml">
                 <tree>
-                    <field name="name"/>
-                    <field name="gender"/>
-                    <field name="responsible_id"/>
-                    <field name="age"/>
-                    <field name="note"/>
-                    <field name="appointments_count"/>
-                    <field name="state"/>
+                        <!--Dynamic List View optional=''-->
+                        <field name="name"/>
+                        <field name="gender"/>
+                        <field name="responsible_id" optional="hide"/>
+                        <field name="age" optional="hide"/>
+                        <field name="note" optional="hide"/>
+                        <field name="appointments_count" optional="hide"/>
+                        <!--add colours and widget to status-->
+                        <field name="state" optional="show" widget="badge" decoration-success="state == 'confirm' or state == 'done'" decoration-info="state == 'draft'" decoration-danger="state == 'cancel'"/>
+                        <field name="reference" optional="hide"/>
+
+
 
                 </tree>
             </field>
@@ -63,10 +68,11 @@
                         <!--StatusBar and some controllers-->
                         <header>
                             <button id="button_confirm" name="action_confirm" string="Cancel" class="btn-danger"
-                             attrs="{'invisible': [('state', '=', 'cancel')]}" type="object"/>
+                                    attrs="{'invisible': [('state', '=', 'cancel')]}" type="object"/>
                             <button id="button_done" name="action_done" string="Mark as Done" class="btn-success"
-                                   states="confirm" type="object" confirm="Are you sure? Mark it as DONE!"/>
-                            <button id="button_create_appointment" name="%(create_appointment_action)d" string="Create New Appointment" class="btn-success"
+                                    states="confirm" type="object" confirm="Are you sure? Mark it as DONE!"/>
+                            <button id="button_create_appointment" name="%(create_appointment_action)d"
+                                    string="Create New Appointment" class="btn-success"
                                     type="action"/>
                             <field name="state" widget="statusbar" options="{'clickable': '1'}"
                                    statusbar_visible="draft,confirm"/>
@@ -87,7 +93,7 @@
                             </group>
                             <group>
                                 <!--invisible="context.get('hide_gender', True)"-->
-                                <field name="gender" />
+                                <field name="gender"/>
                                 <field name="note"/>
                             </group>
                         </group>
