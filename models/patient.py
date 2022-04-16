@@ -28,6 +28,7 @@ class HospitalPatient(models.Model):
     responsible_id = fields.Many2one('res.partner', string="Responsible", tracking=True)
     reference = fields.Char(string='Patient Reference', required=True, copy=False, readonly=True,
                             default=lambda self: _('New'))
+    image = fields.Binary(string="Patient Image")
 
     # computed method
     def _compute_appointments_count(self):
