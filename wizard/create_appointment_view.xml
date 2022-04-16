@@ -6,11 +6,13 @@
             <field name="arch" type="xml">
                 <form string="Lost Reason">
                     <group class="oe_title">
-                        <field name="name" />
+                        <field name="date_appointment" />
                         <field name="patient_id" />
                     </group>
                     <footer>
                         <button name="action_create_appointment" string="Submit" type="object" class="btn-primary"/>
+                        <button name="action_get_test" string="get" type="object" class="btn-primary"/>
+                        <button name="action_view_appointments" string="View Appointments" type="object" class="btn-success"/>
                         <button string="Cancel" class="btn-secondary" special="cancel"/>
                     </footer>
                 </form>

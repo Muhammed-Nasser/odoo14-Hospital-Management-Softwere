@@ -24,7 +24,7 @@ class HospitalAppointments(models.Model):
     patient_id = fields.Many2one('hospital.patient', string="Patient", required=True, tracking=True)
     reference = fields.Char(string='appointment Reference', required=True, copy=False, readonly=True,
                             default=lambda self: _('New'))
-    date_appointment = fields.Date(string="Date")
+    date_appointment = fields.Date(string="Date", required=True, tracking=True)
     date_check = fields.Datetime(string="Check Up Time")
     # related fields
     age = fields.Integer(string='Age', related='patient_id.age')

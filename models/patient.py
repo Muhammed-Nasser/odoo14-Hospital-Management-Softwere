@@ -23,6 +23,7 @@ class HospitalPatient(models.Model):
         ('done', 'Done'),
         ('cancel', 'cancelled'),
     ], default='draft', string="Status", tracking=True)
+
     # Many2one Relation
     responsible_id = fields.Many2one('res.partner', string="Responsible", tracking=True)
     reference = fields.Char(string='Patient Reference', required=True, copy=False, readonly=True,
@@ -35,7 +36,6 @@ class HospitalPatient(models.Model):
             num = rec.env['hospital.appointment'].search_count([('patient_id', '=', rec.id)])
             rec.appointments_count = num
             print(rec.env['hospital.appointment'])
-
 
     # buttons functions
     def action_confirm(self):
@@ -59,12 +59,14 @@ class HospitalPatient(models.Model):
             vals['reference'] = self.env['ir.sequence'].next_by_code('patient.no') or _('New')
         return super(HospitalPatient, self).create(vals)
 
-    # override default value function => called when we add default='value' attr. 
+    # override default value function => called when we add default='value' attr.
+    # when we override it we can add all default values in it
     @api.model
     def default_get(self, fields):
         vals = super(HospitalPatient, self).default_get(fields)
         vals['gender'] = 'female'
         return vals
+
 
 
 
