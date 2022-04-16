@@ -28,26 +28,53 @@ class CreateAppointmentWizard(models.TransientModel):
 
     # Return Action and View From
     def action_view_appointments(self):
+        # there are 3 methods
+        # return tree action of appointment of select patient
         action = self.env['ir.actions.actions']._for_xml_id('om_hospital.appointments_action')
+        # condition
         action['domain'] = [('patient_id', '=', self.patient_id.id)]
         return action
 
-    def action_get_test(self):
-        active_model = self.env.context.get('active_model')
-        vals = {
-            'date_appointment': self.date_appointment,
-            'patient_id': self.env[active_model].browse(self.env.context.get('active_id')).id,
-        }
-        appointment_rec = self.env['hospital.appointment'].create(vals)
+        # method 2
 
-        # return view form of this new record
-        return {
-            'name': _('Appointment'),
-            'type': 'ir.actions.act_window',
-            'view_mode': 'form',
-            'res_model': 'hospital.appointment',
-            'res_id': appointment_rec.id,
-        }
+        # action = self.env.ref('om_hospital.appointments_action').read()[0]
+        # action['domain'] = [('patient_id', '=', self.patient_id.id)]
+        # return action
+
+        # method 3
+        # return {
+        #     'name': 'Appointments',
+        #     'type': 'ir.actions.act_window',
+        #     'view_type': 'form',
+        #     'res_model': 'hospital.appointment',
+        #     'target': 'current',
+        #     'view_mode': 'tree,form',
+        #     'domain': [('patient_id', '=', self.patient_id.id)],
+        # }
+
+    # get patient_id from active patient form => if patient form is opened
+    def action_get_test(self):
+        if self.env.context.get('active_model'):
+            active_model = self.env.context.get('active_model')
+            if self.env[active_model].browse(self.env.context.get('active_id')).id:
+                vals = {
+                    'date_appointment': self.date_appointment,
+                    'patient_id': self.env[active_model].browse(self.env.context.get('active_id')).id,
+                }
+                appointment_rec = self.env['hospital.appointment'].create(vals)
+
+                # return view form of this new record
+                return {
+                    'name': _('Appointment'),
+                    'type': 'ir.actions.act_window',
+                    'view_mode': 'form',
+                    'res_model': 'hospital.appointment',
+                    'res_id': appointment_rec.id,
+                }
+        else:
+            pass
+
+
 
 
 

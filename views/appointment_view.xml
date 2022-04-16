@@ -37,6 +37,10 @@
             <field name="model">hospital.appointment</field>
             <field name="arch" type="xml">
                 <tree>
+                     <header>
+                        <button name="action_done" type="object" string="Mark As DONE"
+                            class="btn-success"/>
+                    </header>
                     <field name="patient_id"/>
                     <field name="note"/>
                     <field name="state"/>

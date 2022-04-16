@@ -32,16 +32,18 @@ class HospitalAppointments(models.Model):
                                      related='patient_id.responsible_id')
 
     def action_confirm(self):
-        if self.state != 'cancel':
-            self.state = 'cancel'
-        else:
-            print("not allowed")
+        for rec in self:
+            if rec.state != 'cancel':
+                rec.state = 'cancel'
+            else:
+                print("not allowed")
 
     def action_done(self):
-        if self.state != 'done':
-            self.state = 'done'
-        else:
-            print("not allowed")
+        for rec in self:
+            if rec.state != 'done':
+                rec.state = 'done'
+            else:
+                print("not allowed")
 
     # override create function
     @api.model
