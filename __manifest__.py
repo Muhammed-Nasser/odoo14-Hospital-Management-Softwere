@@ -17,6 +17,7 @@
         'data/data.xml',
         'wizard/create_appointment_view.xml',
         'views/patient_all.xml',
+        'views/doctor_view.xml',
         'views/patient_kids.xml',
         'views/appointment_view.xml',
         'views/sale.xml',

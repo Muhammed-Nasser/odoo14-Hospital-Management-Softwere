@@ -1,0 +1,163 @@
+<odoo>
+    <data>
+        <!--Kanban view-->
+        <record id="hospital_doctor_kanban" model="ir.ui.view">
+            <field name="name">hospital doctor kanban</field>
+            <field name="model">hospital.doctor</field>
+            <field name="arch" type="xml">
+                <!--add sample="1" to show a background data sample in there is no data -->
+                <kanban sample="1">
+                    <field name="name"/>
+                    <field name="gender"/>
+                    <field name="age"/>
+                    <field name="note"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_global_click">
+                                <div class="oe_kanban_details">
+                                    <ul>
+                                        <li>
+                                            Name:
+                                            <field name="name"/>
+                                            Age:
+                                            <field name="age"/>
+                                            Gender:
+                                            <field name="gender"/>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </div>
+
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!-- tree view Main UI -->
+        <record id="hospital_doctor_tree" model="ir.ui.view">
+            <field name="name">hospital doctor tree</field>
+            <field name="model">hospital.doctor</field>
+            <field name="arch" type="xml">
+                <!--add sample="1" to show a background data sample in there is no data -->
+                <tree sample="1">
+                    <field name="name"/>
+                    <field name="gender"/>
+                    <field name="age"/>
+                    <field name="note"/>
+                    <field name="state"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <!-- form view to create or edit -->
+        <record id="hospital_doctor_form" model="ir.ui.view">
+            <field name="name">hospital doctor form</field>
+            <field name="model">hospital.doctor</field>
+            <field name="arch" type="xml">
+                <form>
+
+                    <sheet>
+                        <!--StatusBar and some controllers-->
+                        <header>
+                            <button id="button_busy" name="action_busy" string="Busy" class="btn-danger"
+                             attrs="{'invisible': [('state', '=', 'busy')]}" type="object"
+                            confirm="Are you sure? Mark it as Busy!"/>
+                            <button id="button_available" name="action_available" string="Mark as Available" class="btn-success"
+                                   states="busy" type="object" confirm="Are you sure? Mark it as Available!"/>
+                            <field name="state" widget="statusbar" options="{'clickable': '1'}"
+                                   statusbar_visible="not_available"/>
+                        </header>
+                        <field name="image" widget="image" class="oe_avatar"/>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="reference" readonly="1"/>
+                            </h1>
+                        </div>
+
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="age"/>
+                            </group>
+                            <group>
+                                <!--invisible="context.get('hide_gender', True)"-->
+                                <field name="gender" />
+                                <field name="note"/>
+                            </group>
+                        </group>
+                    </sheet>
+
+                    <!--Email threats-->
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- search Edit -->
+        <record id="hospital_doctor_search" model="ir.ui.view">
+            <field name="name">doctor.search</field>
+            <field name="model">hospital.doctor</field>
+            <field name="priority">32</field>
+            <field name="arch" type="xml">
+                <search string="Doctors">
+
+                    <!--search by name & note-->
+                    <field name="name"/>
+                    <field name="state"/>
+                    <separator/>
+
+                    <!--Group By-->
+                    <group expand="1" string="Group By">
+                        <filter string="Male" name="male" domain="[('gender', '=', 'male')]"/>
+                        <filter string="Female" name="female" domain="[('gender', '=', 'female')]"/>
+                        <filter string="Available" name="available" domain="[('state', '=', 'available')]"/>
+                    </group>
+                    <!--Filters-->
+                    <filter string="Gender" name="gender" context="{'group_by':'gender'}"/>
+                    <filter string="Status" name="status" context="{'group_by':'state'}"/>
+                </search>
+            </field>
+        </record>
+
+
+        <!--Actions | doctor -->
+        <record id="doctors_action" model="ir.actions.act_window">
+            <field name="name">doctors</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hospital.doctor</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <!-- add default group by value in main view | add more than value using ,'search_default_name of field': 1 between {} -->
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new doctor!
+                </p>
+            </field>
+        </record>
+
+
+
+        <!-- main top menu -->
+        <menuitem
+                id="hospital_doctor_root"
+                name="Doctors"
+                parent="hospital_base_root"
+                sequence="10"/>
+
+        <!-- dropdown top menu -->
+        <menuitem
+                id="hospital_patient"
+                name="All doctors"
+                parent="hospital_doctor_root"
+                action="doctors_action"
+                sequence="10"/>
+
+    </data>
+</odoo>
