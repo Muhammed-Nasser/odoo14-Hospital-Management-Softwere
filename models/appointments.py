@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from odoo import api, fields, models, _
+from odoo.exceptions import ValidationError
 
 
 class HospitalAppointments(models.Model):
@@ -41,14 +42,14 @@ class HospitalAppointments(models.Model):
             if rec.state != 'cancel':
                 rec.state = 'cancel'
             else:
-                print("not allowed")
+                raise ValidationError(_("Sorry, %s has already confirm state!" % self.reference))
 
     def action_done(self):
         for rec in self:
             if rec.state != 'done':
                 rec.state = 'done'
             else:
-                print("not allowed")
+                raise ValidationError(_("Sorry, %s has already Done state!" % self.reference))
 
     # override create function
     @api.model
@@ -72,6 +73,12 @@ class HospitalAppointments(models.Model):
         else:
             self.gender = ''
             self.note = ''
+
+    # override delete function
+    def unlink(self):
+        if self.state == 'done':
+            raise ValidationError(_("Sorry, You can not delete %s that has a DONE status!" % self.reference))
+        return super(HospitalAppointments, self).unlink()
 
 
 class HospitalAppointmentsMedicine(models.Model):

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from odoo import api, fields, models, _
+from odoo.exceptions import ValidationError
 
 
 class HospitalDoctor(models.Model):
@@ -32,13 +33,13 @@ class HospitalDoctor(models.Model):
         if self.state != 'available':
             self.state = 'available'
         else:
-            print("not allowed")
+            raise ValidationError(_("Sorry, %s has already available state!" % self.reference))
 
     def action_busy(self):
         if self.state != 'busy':
             self.state = 'busy'
         else:
-            print("not allowed")
+            raise ValidationError(_("Sorry, %s has already busy state!" % self.reference))
 
     # override create function
     @api.model

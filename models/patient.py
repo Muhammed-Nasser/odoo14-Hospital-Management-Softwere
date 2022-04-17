@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from odoo import api, fields, models, _
+from odoo.exceptions import ValidationError
 
 
 class HospitalPatient(models.Model):
@@ -47,13 +48,13 @@ class HospitalPatient(models.Model):
         if self.state != 'cancel':
             self.state = 'cancel'
         else:
-            print("not allowed")
+            raise ValidationError(_("Sorry, %s has already cancel state!" % self.reference))
 
     def action_done(self):
         if self.state != 'done':
             self.state = 'done'
         else:
-            print("not allowed")
+            raise ValidationError(_("Sorry, %s has already done state!" % self.reference))
 
     # override create function
     @api.model
