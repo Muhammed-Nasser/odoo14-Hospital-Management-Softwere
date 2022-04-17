@@ -28,6 +28,8 @@ class HospitalPatient(models.Model):
 
     # Many2one Relation
     responsible_id = fields.Many2one('res.partner', string="Responsible", tracking=True)
+    # one2many Relation
+    appointment_ids = fields.One2many('hospital.appointment', 'patient_id', string="Appointments")
     reference = fields.Char(string='Patient Reference', required=True, copy=False, readonly=True,
                             default=lambda self: _('New'))
     image = fields.Binary(string="Patient Image")

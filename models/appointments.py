@@ -8,6 +8,7 @@ class HospitalAppointments(models.Model):
     _description = "Hospital Appointments Model"
     # order by field desc
     _order = "reference desc"
+    _rec_name = 'reference'
 
     note = fields.Text(string='Description', tracking=True)
     state = fields.Selection([
@@ -21,7 +22,7 @@ class HospitalAppointments(models.Model):
         ('male', 'Male'),
         ('female', 'Female'),
         ('other', 'Other'),
-    ], required=True, tracking=True)
+    ], related='patient_id.gender', required=True, tracking=True)
     # Many2one Relation
     patient_id = fields.Many2one('hospital.patient', string="Patient", required=True, tracking=True)
     doctor_id = fields.Many2one('hospital.doctor', string="Doctor", required=True, tracking=True)
@@ -33,6 +34,7 @@ class HospitalAppointments(models.Model):
     age = fields.Integer(string='Age', related='patient_id.age')
     responsible_id = fields.Many2one('res.partner', string="Responsible", tracking=True,
                                      related='patient_id.responsible_id')
+    medicine_ids = fields.One2many('hospital.appointment.medicine', 'appointment_id', string="Medicine")
 
     def action_confirm(self):
         for rec in self:
@@ -72,4 +74,11 @@ class HospitalAppointments(models.Model):
             self.note = ''
 
 
+class HospitalAppointmentsMedicine(models.Model):
+    _name = "hospital.appointment.medicine"
+    # order by field desc
+    _order = "name desc"
 
+    name = fields.Char(string="Name")
+    quantity = fields.Integer(string="Quantity")
+    appointment_id = fields.Many2one('hospital.appointment', string="Appointment")

@@ -37,13 +37,18 @@
             <field name="model">hospital.appointment</field>
             <field name="arch" type="xml">
                 <tree>
-                     <header>
+                    <header>
                         <button name="action_done" type="object" string="Mark As DONE"
-                            class="btn-success"/>
+                                class="btn-success"/>
                     </header>
                     <field name="patient_id"/>
                     <field name="note"/>
-                    <field name="state"/>
+                    <field name="state" optional="show" widget="badge"
+                           decoration-success="state == 'confirm' or state == 'done'" decoration-info="state == 'draft'"
+                           decoration-danger="state == 'cancel'"/>
+                    <field name="doctor_id"/>
+                    <field name="date_appointment"/>
+                    <field name="date_check"/>
 
                 </tree>
             </field>
@@ -60,9 +65,9 @@
                         <!--StatusBar and some controllers-->
                         <header>
                             <button id="button_confirm" name="action_confirm" string="Cancel" class="btn-danger"
-                             attrs="{'invisible': [('state', '=', 'cancel')]}" type="object"/>
+                                    attrs="{'invisible': [('state', '=', 'cancel')]}" type="object"/>
                             <button id="button_done" name="action_done" string="Mark as Done" class="btn-success"
-                                   states="confirm" type="object" confirm="Are you sure? Mark it as DONE!"/>
+                                    states="confirm" type="object" confirm="Are you sure? Mark it as DONE!"/>
                             <field name="state" widget="statusbar" options="{'clickable': '1'}"
                                    statusbar_visible="draft,confirm"/>
                         </header>
@@ -74,7 +79,7 @@
                         <group>
                             <group>
                                 <field name="patient_id"/>
-                               <!-- read only issue (while save the value disappear) => fixed with force_save-->
+                                <!-- read only issue (while save the value disappear) => fixed with force_save-->
                                 <field name="gender" readonly="1" force_save="1"/>
                                 <field name="age"/>
                                 <field name="responsible_id"/>
@@ -86,6 +91,17 @@
                                 <field name="date_check"/>
                             </group>
                         </group>
+                        <notebook>
+                            <page string="medicine">
+                                <field name="medicine_ids" >
+                                    <!--editable="1" => to edit record in tree view without open popup window-->
+                                    <tree editable="1">
+                                        <field name="name" />
+                                        <field name="quantity"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
                     </sheet>
 
                     <!--Email threats-->
