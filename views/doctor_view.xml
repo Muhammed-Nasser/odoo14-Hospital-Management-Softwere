@@ -66,7 +66,7 @@
                              attrs="{'invisible': [('state', '=', 'busy')]}" type="object"
                             confirm="Are you sure? Mark it as Busy!"/>
                             <button id="button_available" name="action_available" string="Mark as Available" class="btn-success"
-                                   states="busy" type="object" confirm="Are you sure? Mark it as Available!"/>
+                                   states="busy,not_available" type="object" confirm="Are you sure? Mark it as Available!"/>
                             <field name="state" widget="statusbar" options="{'clickable': '1'}"
                                    statusbar_visible="not_available"/>
                         </header>

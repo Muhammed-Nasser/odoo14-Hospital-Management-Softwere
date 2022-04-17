@@ -25,7 +25,7 @@ class HospitalDoctor(models.Model):
 
     reference = fields.Char(string='Doctor Reference', required=True, copy=False, readonly=True,
                             default=lambda self: _('New'))
-    image = fields.Binary(string="Patient Image")
+    image = fields.Binary(string="Patient Image", copy=0)
 
     # buttons functions
     def action_available(self):
@@ -48,6 +48,18 @@ class HospitalDoctor(models.Model):
         if vals.get('reference', _('New')) == _('New'):
             vals['reference'] = self.env['ir.sequence'].next_by_code('doctor.no') or _('New')
         return super(HospitalDoctor, self).create(vals)
+
+    # override copy(duplicate) method
+    @api.returns('self', lambda value: value.id)
+    def copy(self, default=None):
+        default = dict(default or {})
+        if 'name' not in default:
+            default['name'] = _("%s (Copy)") % self.name
+            # if you want to erase value (do not copy it )
+            # there is two methods => in field you can add this attribute copy="0" look at image or this method
+            default['age'] = ""
+        return super(HospitalDoctor, self).copy(default=default)
+
 
 
 
