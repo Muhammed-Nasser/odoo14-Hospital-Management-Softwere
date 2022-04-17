@@ -39,7 +39,8 @@
             <field name="name">hospital patient tree</field>
             <field name="model">hospital.patient</field>
             <field name="arch" type="xml">
-                <tree>
+                <!-- multi_edit="1" to enable multi edit in tree view-->
+                <tree multi_edit="1">
                         <!--Dynamic List View optional=''-->
                         <field name="name"/>
                         <field name="gender"/>
