@@ -51,9 +51,6 @@
                         <!--add colours and widget to status-->
                         <field name="state" optional="show" widget="badge" decoration-success="state == 'confirm' or state == 'done'" decoration-info="state == 'draft'" decoration-danger="state == 'cancel'"/>
                         <field name="reference" optional="hide"/>
-
-
-
                 </tree>
             </field>
         </record>
@@ -97,6 +94,12 @@
                                 <field name="gender"/>
                                 <field name="note"/>
                             </group>
+                            <!-- add notebook-->
+                            <notebook>
+                                <page string="More Info" name="more_info">
+                                    <field name="note"/>
+                                </page>
+                            </notebook>
                         </group>
                     </sheet>
 
