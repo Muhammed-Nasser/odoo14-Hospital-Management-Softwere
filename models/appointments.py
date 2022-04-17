@@ -6,6 +6,8 @@ class HospitalAppointments(models.Model):
     _name = "hospital.appointment"
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = "Hospital Appointments Model"
+    # order by field desc
+    _order = "reference desc"
 
     note = fields.Text(string='Description', tracking=True)
     state = fields.Selection([

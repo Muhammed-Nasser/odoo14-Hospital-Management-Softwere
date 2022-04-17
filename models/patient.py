@@ -6,6 +6,8 @@ class HospitalPatient(models.Model):
     _name = "hospital.patient"
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = "Hospital Patient Model"
+    # order depends on multiple fields
+    _order = "name,age desc"
 
     name = fields.Char(string='Name', required=True, tracking=True)
     age = fields.Integer(string='Age')
