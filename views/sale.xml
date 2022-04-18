@@ -27,5 +27,13 @@
                 </xpath>
             </field>
         </record>
+
+        <!-- add appointment to dropdown menu in sale module-->
+        <menuitem
+                id="sale_hospital_appointment"
+                name="Appointments"
+                parent="sale.sale_order_menu"
+                action="appointments_action"
+                sequence="2"/>
     </data>
 </odoo>
