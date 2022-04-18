@@ -11,7 +11,7 @@
     'depends': ['sale',
                 'mail'],
     'data': [
-        # orders security => data => wizard => views
+        # orders security => data => wizard => views => report
         # menu wizard add in the view files
         'security/ir.model.access.csv',
         'data/data.xml',
@@ -21,6 +21,9 @@
         'views/patient_kids.xml',
         'views/appointment_view.xml',
         'views/sale.xml',
+        'report/report_patient_details.xml',
+        'report/report_appointment_medicine_details.xml',
+        'report/report.xml',
     ],
     'demo': [],
     'qweb': [],
