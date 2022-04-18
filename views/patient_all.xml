@@ -95,6 +95,7 @@
                                 <!--invisible="context.get('hide_gender', True)"-->
                                 <field name="gender"/>
                                 <field name="note"/>
+                                <field name="email"/>
                             </group>
 
                         </group>

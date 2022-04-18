@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from odoo import api, fields, models, _
-from odoo.exceptions import ValidationError
-
+from odoo.exceptions import ValidationError, UserError
+import re
 
 class HospitalPatient(models.Model):
     _name = "hospital.patient"
@@ -34,6 +34,7 @@ class HospitalPatient(models.Model):
     reference = fields.Char(string='Patient Reference', required=True, copy=False, readonly=True,
                             default=lambda self: _('New'))
     image = fields.Binary(string="Patient Image")
+    email = fields.Char(string="Email", required=True)
 
     # computed method
     def _compute_appointments_count(self):
@@ -73,6 +74,23 @@ class HospitalPatient(models.Model):
         vals['gender'] = 'female'
         return vals
 
+    # override delete function
+    def unlink(self):
+        if self.state == 'done':
+            raise ValidationError(_("Sorry, You can not delete %s that has a DONE status!" % self.reference))
+        return super(HospitalPatient, self).unlink()
+
+    # add constrains to field
+    @api.constrains('email')
+    def check_email_value(self):
+        for rec in self:
+            # unique
+            patient = self.env['hospital.patient'].search([('email', '=', rec.email), ('id', '!=', rec.id)])
+            # match email format
+            if not re.match('(\w+[.|\w])*@(\w+[.])*\w+', self.email):
+                raise UserError("Email not valid.")
+            if patient:
+                raise UserError("Email already exist.")
 
 
 
