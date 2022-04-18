@@ -92,5 +92,12 @@ class HospitalPatient(models.Model):
             if patient:
                 raise UserError("Email already exist.")
 
+    # override name get method _rec_name
+    def name_get(self):
+        result = []
+        for account in self:
+            name = '[' + account.reference + '] ' + account.name
+            result.append((account.id, name))
+        return result
 
 
