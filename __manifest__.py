@@ -8,8 +8,10 @@
     'sequence': 10,
     'description': """ Hospital Management Software """,
     'category': 'Productivity',
-    'depends': ['sale',
-                'mail'],
+    'depends': ['base',
+                'mail',
+                'report_xlsx',
+                ],
     'data': [
         # orders security => data => wizard => views => report
         # menu wizard add in the view files
@@ -20,7 +22,8 @@
         'views/doctor_view.xml',
         'views/patient_kids.xml',
         'views/appointment_view.xml',
-        'views/sale.xml',
+        # 'views/sale.xml',
+        # 'views/product.xml',
         'report/report_patient_details.xml',
         'report/report_appointment_medicine_details.xml',
         'report/report.xml',
