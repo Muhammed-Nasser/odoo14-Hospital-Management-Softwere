@@ -87,6 +87,14 @@ class HospitalAppointments(models.Model):
             raise ValidationError(_("Sorry, You can not delete %s that has a DONE status!" % self.reference))
         return super(HospitalAppointments, self).unlink()
 
+    def action_url(self):
+        return {
+            'type': 'ir.actions.act_url',
+            'target': 'self',
+            'url': '/web',
+        }
+
+
 
 class HospitalAppointmentsMedicine(models.Model):
     _name = "hospital.appointment.medicine"

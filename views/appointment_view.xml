@@ -83,6 +83,8 @@
                                     states="confirm" type="object"/>
                             <button id="button_done" name="action_done" string="Mark as Done" class="btn-success"
                                     states="confirm" type="object" confirm="Are you sure? Mark it as DONE!"/>
+                            <button name="action_url" string="Git URL" class="btn-primary"
+                                    type="object"/>
                             <field name="state" widget="statusbar" options="{'clickable': '1'}"
                                    statusbar_visible="draft,confirm"/>
                         </header>
