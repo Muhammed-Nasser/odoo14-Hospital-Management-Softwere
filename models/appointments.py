@@ -39,10 +39,17 @@ class HospitalAppointments(models.Model):
 
     def action_confirm(self):
         for rec in self:
+            if rec.state != 'confirm':
+                rec.state = 'confirm'
+            else:
+                raise ValidationError(_("Sorry, %s has already confirm state!" % self.reference))
+
+    def action_cancel(self):
+        for rec in self:
             if rec.state != 'cancel':
                 rec.state = 'cancel'
             else:
-                raise ValidationError(_("Sorry, %s has already confirm state!" % self.reference))
+                raise ValidationError(_("Sorry, %s has already Cancel state!" % self.reference))
 
     def action_done(self):
         for rec in self:
