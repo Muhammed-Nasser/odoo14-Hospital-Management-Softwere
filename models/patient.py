@@ -100,4 +100,11 @@ class HospitalPatient(models.Model):
             result.append((account.id, name))
         return result
 
+    # action to smart bottom appointments
+    def action_open_appointment(self):
+        action = self.env['ir.actions.actions']._for_xml_id('om_hospital.appointments_action')
+        # condition
+        action['domain'] = [('patient_id', '=', self.patient_id.id)]
+        return action
+
 

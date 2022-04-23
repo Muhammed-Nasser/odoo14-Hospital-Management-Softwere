@@ -80,20 +80,31 @@
             <field name="model">hospital.patient</field>
             <field name="arch" type="xml">
                 <form>
-
+                    <!--StatusBar and some controllers-->
+                    <header>
+                        <button id="button_confirm" name="action_confirm" string="Cancel" class="btn-danger"
+                                attrs="{'invisible': [('state', '=', 'cancel')]}" type="object"/>
+                        <button id="button_done" name="action_done" string="Mark as Done" class="btn-success"
+                                states="confirm" type="object" confirm="Are you sure? Mark it as DONE!"/>
+                        <button id="button_create_appointment" name="%(create_appointment_action)d"
+                                string="Create New Appointment" class="btn-success"
+                                type="action"/>
+                        <field name="state" widget="statusbar" options="{'clickable': '1'}"
+                               statusbar_visible="draft,confirm"/>
+                    </header>
                     <sheet>
-                        <!--StatusBar and some controllers-->
-                        <header>
-                            <button id="button_confirm" name="action_confirm" string="Cancel" class="btn-danger"
-                                    attrs="{'invisible': [('state', '=', 'cancel')]}" type="object"/>
-                            <button id="button_done" name="action_done" string="Mark as Done" class="btn-success"
-                                    states="confirm" type="object" confirm="Are you sure? Mark it as DONE!"/>
-                            <button id="button_create_appointment" name="%(create_appointment_action)d"
-                                    string="Create New Appointment" class="btn-success"
-                                    type="action"/>
-                            <field name="state" widget="statusbar" options="{'clickable': '1'}"
-                                   statusbar_visible="draft,confirm"/>
-                        </header>
+                        <!-- add smart bottom -->
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_open_appointment" type="object"
+                                    class="oe_stat_button" icon="fa-calendar">
+                                <div class="o_stat_info">
+                                    <field name="appointments_count" class="o_stat_value"/>
+                                    <span class="o_stat_text">Appointments</span>
+                                </div>
+                            </button>
+                        </div>
+
+
                         <field name="image" widget="image" class="oe_avatar"/>
                         <div class="oe_title">
                             <h1>

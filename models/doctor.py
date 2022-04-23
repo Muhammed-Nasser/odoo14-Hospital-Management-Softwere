@@ -28,6 +28,8 @@ class HospitalDoctor(models.Model):
                             default=lambda self: _('New'))
     image = fields.Binary(string="Patient Image", copy=0)
 
+    appointments_count = fields.Integer(string='Appointments Count', compute='_compute_appointments_count')
+
     # buttons functions
     def action_available(self):
         if self.state != 'available':
@@ -61,7 +63,20 @@ class HospitalDoctor(models.Model):
             default['age'] = ""
         return super(HospitalDoctor, self).copy(default=default)
 
+    # computed method
+    def _compute_appointments_count(self):
+        # Singleton Error => solve for rec in self:
+        for rec in self:
+            num = rec.env['hospital.appointment'].search_count([('doctor_id', '=', rec.id)])
+            rec.appointments_count = num
+            print(rec.env['hospital.appointment'])
 
+    # action to smart bottom appointments
+    def action_open_appointment(self):
+        action = self.env['ir.actions.actions']._for_xml_id('om_hospital.appointments_action')
+        # condition
+        action['domain'] = [('doctor_id', '=', self.id)]
+        return action
 
 
 

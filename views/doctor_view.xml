@@ -58,18 +58,30 @@
             <field name="model">hospital.doctor</field>
             <field name="arch" type="xml">
                 <form>
-
+                    <!--StatusBar and some controllers-->
+                    <header>
+                        <button id="button_busy" name="action_busy" string="Busy" class="btn-danger"
+                                attrs="{'invisible': [('state', '=', 'busy')]}" type="object"
+                                confirm="Are you sure? Mark it as Busy!"/>
+                        <button id="button_available" name="action_available" string="Mark as Available"
+                                class="btn-success"
+                                states="busy,not_available" type="object"
+                                confirm="Are you sure? Mark it as Available!"/>
+                        <field name="state" widget="statusbar" options="{'clickable': '1'}"
+                               statusbar_visible="not_available"/>
+                    </header>
                     <sheet>
-                        <!--StatusBar and some controllers-->
-                        <header>
-                            <button id="button_busy" name="action_busy" string="Busy" class="btn-danger"
-                             attrs="{'invisible': [('state', '=', 'busy')]}" type="object"
-                            confirm="Are you sure? Mark it as Busy!"/>
-                            <button id="button_available" name="action_available" string="Mark as Available" class="btn-success"
-                                   states="busy,not_available" type="object" confirm="Are you sure? Mark it as Available!"/>
-                            <field name="state" widget="statusbar" options="{'clickable': '1'}"
-                                   statusbar_visible="not_available"/>
-                        </header>
+                        <!-- add smart bottom -->
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_open_appointment" type="object"
+                                    class="oe_stat_button" icon="fa-calendar">
+                                <div class="o_stat_info">
+                                    <field name="appointments_count" class="o_stat_value"/>
+                                    <span class="o_stat_text">Appointments</span>
+                                </div>
+                            </button>
+                        </div>
+
                         <field name="image" widget="image" class="oe_avatar"/>
                         <div class="oe_title">
                             <h1>
@@ -84,7 +96,7 @@
                             </group>
                             <group>
                                 <!--invisible="context.get('hide_gender', True)"-->
-                                <field name="gender" />
+                                <field name="gender"/>
                                 <field name="note"/>
                             </group>
                         </group>
@@ -141,7 +153,6 @@
                 </p>
             </field>
         </record>
-
 
 
         <!-- main top menu -->
