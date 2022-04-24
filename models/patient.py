@@ -47,10 +47,16 @@ class HospitalPatient(models.Model):
 
     # buttons functions
     def action_confirm(self):
+        if self.state != 'confirm':
+            self.state = 'confirm'
+        else:
+            raise ValidationError(_("Sorry, %s has already Confirm state!" % self.reference))
+
+    def action_cancel(self):
         if self.state != 'cancel':
             self.state = 'cancel'
         else:
-            raise ValidationError(_("Sorry, %s has already cancel state!" % self.reference))
+            raise ValidationError(_("Sorry, %s has already Cancel state!" % self.reference))
 
     def action_done(self):
         if self.state != 'done':
