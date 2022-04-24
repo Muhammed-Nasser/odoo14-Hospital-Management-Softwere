@@ -3,6 +3,7 @@ from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError, UserError
 import re
 
+
 class HospitalPatient(models.Model):
     _name = "hospital.patient"
     _inherit = ['mail.thread', 'mail.activity.mixin']
@@ -103,8 +104,9 @@ class HospitalPatient(models.Model):
     # action to smart bottom appointments
     def action_open_appointment(self):
         action = self.env['ir.actions.actions']._for_xml_id('om_hospital.appointments_action')
-        # condition
-        action['domain'] = [('patient_id', '=', self.patient_id.id)]
+        # condition to view only this patient's appointments
+        action['domain'] = [('patient_id', '=', self.id)]
+        '''to set default value for patient_id 
+        when create new appointment by click on create in patient's appointments view'''
+        action['context'] = {'default_patient_id': self.id}
         return action
-
-

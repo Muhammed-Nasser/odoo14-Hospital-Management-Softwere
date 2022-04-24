@@ -93,8 +93,8 @@
                             <group>
                                 <field name="name"/>
                                 <field name="age"/>
+                                <!-- this is required to add archive in action bottom -->
                                 <field name="active" invisible="1"/>
-
                             </group>
                             <group>
                                 <!--invisible="context.get('hide_gender', True)"-->

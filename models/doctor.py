@@ -78,6 +78,9 @@ class HospitalDoctor(models.Model):
         action = self.env['ir.actions.actions']._for_xml_id('om_hospital.appointments_action')
         # condition
         action['domain'] = [('doctor_id', '=', self.id)]
+        '''to set default value for doctor_id 
+                when create new appointment by click on create in doctor's appointments view'''
+        action['context'] = {'default_doctor_id': self.id}
         return action
 
 
