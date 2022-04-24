@@ -93,6 +93,7 @@
                                statusbar_visible="draft,confirm"/>
                     </header>
                     <sheet>
+
                         <!-- add smart bottom -->
                         <div class="oe_button_box" name="button_box">
                             <button name="action_open_appointment" type="object"
@@ -104,7 +105,9 @@
                             </button>
                         </div>
 
-
+                         <!-- add ribbon -->
+                        <widget name="web_ribbon" title="Done" bg_color="bg-success" states="done"/>
+                        
                         <field name="image" widget="image" class="oe_avatar"/>
                         <div class="oe_title">
                             <h1>
