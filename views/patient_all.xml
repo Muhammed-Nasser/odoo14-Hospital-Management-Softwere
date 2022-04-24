@@ -57,6 +57,7 @@
             <field name="model">hospital.patient</field>
             <field name="arch" type="xml">
                 <!-- multi_edit="1" to enable multi edit in tree view-->
+                <!-- expand="1" to expand by default grouped by in tree view-->
                 <tree multi_edit="1" expand="1">
                     <!--Dynamic List View optional=''-->
                     <field name="name"/>
@@ -176,6 +177,13 @@
                     <filter string="Gender" name="gender" context="{'group_by':'gender'}"/>
                     <filter string="Patient Name" name="patient_name" context="{'group_by':'name'}"/>
                     <filter string="Responsible" name="responsible_id" context="{'group_by':'responsible_id'}"/>
+
+                    <!-- how to  add search panel-->
+                    <searchpanel>
+                        <field name="state" select="multi" string="status" icon="fa-cutlery" color="#875A7B"
+                               enable_counters="1"/>
+                        <field name="gender"  string="Gender" icon="fa-truck" enable_counters="1"/>
+                    </searchpanel>
                 </search>
             </field>
         </record>
