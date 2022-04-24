@@ -93,6 +93,8 @@
                             <group>
                                 <field name="name"/>
                                 <field name="age"/>
+                                <field name="active" invisible="1"/>
+
                             </group>
                             <group>
                                 <!--invisible="context.get('hide_gender', True)"-->

@@ -30,6 +30,8 @@ class HospitalDoctor(models.Model):
 
     appointments_count = fields.Integer(string='Appointments Count', compute='_compute_appointments_count')
 
+    active = fields.Boolean(default=True)
+
     # buttons functions
     def action_available(self):
         if self.state != 'available':
