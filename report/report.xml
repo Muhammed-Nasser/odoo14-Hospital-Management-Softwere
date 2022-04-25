@@ -34,8 +34,19 @@
             <field name="report_type">xlsx</field>
             <field name="report_name">om_hospital.report_patient_details_xlsx</field>
             <field name="report_file">om_hospital.report_patient_details_xlsx</field>
-<!--            <field name="print_report_name">'Picking Operations - %s - %s' % (object.partner_id.name or '', object.name)</field>-->
             <field name="binding_model_id" ref="model_hospital_patient"/>
+            <field name="binding_type">report</field>
+        </record>
+
+
+        <!--action for patient appointment report -->
+        <record id="action_report_patient_appointments" model="ir.actions.report">
+            <field name="name">Patient Appointment Report</field>
+            <field name="model">hospital.appointment</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">om_hospital.report_patient_appointments</field>
+            <field name="report_file">om_hospital.report_patient_appointments</field>
+            <field name="binding_model_id" ref="model_hospital_appointment"/>
             <field name="binding_type">report</field>
         </record>
     </data>
